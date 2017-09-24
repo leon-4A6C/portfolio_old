@@ -1,21 +1,49 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {
+  ApolloClient,
+  createNetworkInterface,
+  ApolloProvider,
+} from 'react-apollo'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-class App extends Component {
+import { Home } from './views'
+
+const networkInterface = createNetworkInterface({
+  uri: 'https://api.github.com/graphql',
+})
+
+networkInterface.use([
+  {
+    applyMiddleware(req, next) {
+      if (!req.options.headers) {
+        req.options.headers = {} // Create the header object if needed.
+      }
+
+      // Send the login token in the Authorization header
+      req.options.headers.authorization = `Bearer dc493647c3296c45f0eba7e1c711e72da8ee3c03`
+      next()
+    },
+  },
+])
+
+const apollo = new ApolloClient({
+  networkInterface,
+})
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <ApolloProvider client={apollo}>
+        <BrowserRouter>
+          <div>
+            <Switch>
+              <Route path="/" component={Home} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </ApolloProvider>
+    )
   }
 }
 
-export default App;
+export default App
