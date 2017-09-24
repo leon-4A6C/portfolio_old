@@ -9,7 +9,6 @@ import { ThemeProvider } from 'styled-components'
 
 import { token } from './tokens'
 import Main from './views'
-import { Nav, Footer } from './components'
 import { light } from './themes'
 
 const networkInterface = createNetworkInterface({
@@ -40,14 +39,10 @@ class App extends React.Component {
       <ThemeProvider theme={light}>
         <ApolloProvider client={apollo}>
           <BrowserRouter>
-            <div>
-              <Nav />
-              <Switch>
-                <Route exact path="/" component={Main} />
-                <Route exact path="/:page" component={Main} />
-              </Switch>
-              <Footer />
-            </div>
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route exact path="/:page" component={Main} />
+            </Switch>
           </BrowserRouter>
         </ApolloProvider>
       </ThemeProvider>

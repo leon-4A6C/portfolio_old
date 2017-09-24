@@ -4,6 +4,7 @@ import Waypoint from 'react-waypoint'
 
 import Home from './home'
 import Projects from './projects'
+import { Nav, Footer } from '../components'
 
 const Smain = styled.main`margin-top: ${props => props.theme.nav.height};`
 
@@ -25,25 +26,23 @@ export default class Main extends React.Component {
   }
 
   render() {
-    console.log(this.props.match)
     return (
-      <Smain>
-        <Waypoint
-          onEnter={() => this.waypointEnter('/')}
-          onLeave={this.waypointLeave}
-        />
-        <Home />
-        <Waypoint
-          onEnter={() => this.waypointEnter('/projects')}
-          onLeave={this.waypointLeave}
-        />
-        <Projects />
-        <Waypoint
-          onEnter={() => this.waypointEnter('/bla')}
-          onLeave={this.waypointLeave}
-        />
-        <Projects />
-      </Smain>
+      <div>
+        <Nav match={{ ...this.props.match }} />
+        <Smain>
+          <Waypoint
+            onEnter={() => this.waypointEnter('/')}
+            onLeave={this.waypointLeave}
+          />
+          <Home />
+          <Waypoint
+            onEnter={() => this.waypointEnter('/projects')}
+            onLeave={this.waypointLeave}
+          />
+          <Projects />
+        </Smain>
+        <Footer />
+      </div>
     )
   }
 }

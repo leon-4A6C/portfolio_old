@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -21,7 +22,7 @@ const Sul = styled.ul`
 
 const Sli = styled.li`display: inline-block;`
 
-const SLink = styled(Link)`
+const Slink = styled(Link)`
   display: block;
   padding: 0 1em;
   line-height: ${props => props.theme.nav.height};
@@ -32,19 +33,43 @@ const Indicator = styled.div`
   width: 1em;
   height: 0.2em;
   position: absolute;
+  bottom: 0;
+  background-color: ${props => props.theme.colors.secundary};
 `
 
 export default class Nav extends React.Component {
+  pages = [
+    {
+      name: 'home',
+      path: '/',
+    },
+    {
+      name: 'projects',
+      path: '/projects',
+    },
+  ]
+
+  componentDidUpdate() {
+    if (Object.keys(this.refs).length > 0) {
+      console.log(
+        ReactDOM.findDOMNode(this.refs['li-0']).getBoundingClientRect(),
+      )
+    }
+  }
+
   render() {
+    console.log(this.props)
     return (
       <Snav>
+        <Indicator />
         <Sul>
-          <Sli>
-            <SLink to="/">home</SLink>
-          </Sli>
-          <Sli>
-            <SLink to="/projects">projects</SLink>
-          </Sli>
+          {this.pages.map((x, i) => (
+            <Sli ref={`li-${i}`} key={`li-${i}`}>
+              <Slink key={`link-${i}`} to={x.path}>
+                {x.name}
+              </Slink>
+            </Sli>
+          ))}
         </Sul>
       </Snav>
     )
