@@ -5,6 +5,7 @@ import {
   ApolloProvider,
 } from 'react-apollo'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { token } from './tokens'
 
 import { Home } from './views'
 
@@ -20,7 +21,7 @@ networkInterface.use([
       }
 
       // Send the login token in the Authorization header
-      req.options.headers.authorization = `Bearer dc493647c3296c45f0eba7e1c711e72da8ee3c03`
+      req.options.headers.authorization = `Bearer ${token}`
       next()
     },
   },
