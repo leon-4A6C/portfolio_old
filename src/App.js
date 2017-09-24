@@ -5,9 +5,12 @@ import {
   ApolloProvider,
 } from 'react-apollo'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { token } from './tokens'
+import { ThemeProvider } from 'styled-components'
 
-import { Home } from './views'
+import { token } from './tokens'
+import Main from './views'
+import { Nav, Footer } from './components'
+import { light } from './themes'
 
 const networkInterface = createNetworkInterface({
   uri: 'https://api.github.com/graphql',
@@ -34,15 +37,20 @@ const apollo = new ApolloClient({
 class App extends React.Component {
   render() {
     return (
-      <ApolloProvider client={apollo}>
-        <BrowserRouter>
-          <div>
-            <Switch>
-              <Route path="/" component={Home} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-      </ApolloProvider>
+      <ThemeProvider theme={light}>
+        <ApolloProvider client={apollo}>
+          <BrowserRouter>
+            <div>
+              <Nav />
+              <Switch>
+                <Route exact path="/" component={Main} />
+                <Route exact path="/:page" component={Main} />
+              </Switch>
+              <Footer />
+            </div>
+          </BrowserRouter>
+        </ApolloProvider>
+      </ThemeProvider>
     )
   }
 }
