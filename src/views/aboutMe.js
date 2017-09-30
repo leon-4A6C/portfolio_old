@@ -1,8 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Waypoint from 'react-waypoint'
+import { scroller } from 'react-scroll'
 
-import { Wrapper } from '../components'
+import { Wrapper, GoDown } from '../components'
 import { fadeIn, flyInRev } from '../animations'
 
 const H2 = styled.h2`
@@ -51,13 +52,16 @@ export default class AboutMe extends React.Component {
   render() {
     return (
       <Wrapper id="aboutMeStart">
+        <GoDown
+          onClick={() => scroller.scrollTo('aboutMeStart', { smooth: true })}
+        />
         <Waypoint
           onEnter={() => this.setState({ inView: true })}
           onLeave={() => this.setState({ inView: false })}
         />
         <H2 {...this.state}>Hi</H2>
         <P {...this.state}>
-          I am Léon in 't Veld, I'm a student at ROCMN and I create stuff.
+          I am Léon in 't Veld. I'm a student at ROCMN and I create stuff.
         </P>
       </Wrapper>
     )
