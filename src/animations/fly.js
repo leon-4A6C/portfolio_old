@@ -19,3 +19,23 @@ to {
   transform: translateY(0%);
 }
 `
+
+export const flyOut = keyframes`
+from {
+  transform: translateY(0%);
+}
+
+to {
+  transform: translateY(-100%);
+}
+`
+
+export const flyOutRev = keyframes`
+from {
+  transform: translateY(0%);
+}
+
+to {
+  transform: translateY(100%);
+}
+`
