@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import { light } from './themes'
-import { Home } from './views'
+import Main from './views'
 
 class App extends Component {
   render() {
@@ -11,8 +11,8 @@ class App extends Component {
       <ThemeProvider theme={light}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/:page" component={Home} />
+            <Route exact path="/" component={Main} />
+            <Route exact path="/:page" component={Main} />
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
