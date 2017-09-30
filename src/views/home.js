@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { scroller } from 'react-scroll'
 
 import { Wrapper, GoDown } from '../components'
 import { flyIn, fadeIn, floatY } from '../animations'
@@ -78,8 +79,10 @@ export default class Home extends React.Component {
           <ShootingDiv offset="900ms" />
           <TransSpan>'t Veld</TransSpan>
         </H1>
-        <H4 floatLength="0.3em">Programmer. Designer. Awesome human being.</H4>
-        <GoDown onClick={() => console.log('go down!')} />
+        <H4 floatLength="0.3em">Developer. Designer. Awesome human being.</H4>
+        <GoDown
+          onClick={() => scroller.scrollTo('aboutMeStart', { smooth: true })}
+        />
       </Wrapper>
     )
   }
