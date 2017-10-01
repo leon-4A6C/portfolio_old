@@ -62,7 +62,8 @@ export default class AboutMe extends React.Component {
         />
         <H2 {...this.state}>Hi</H2>
         <P {...this.state}>
-          I am Léon in 't Veld. I'm a student at ROCMN and I create stuff.
+          I am Léon in 't Veld. I'm a student at ROCMN and I like to create
+          stuff.
         </P>
       </Wrapper>
     )
