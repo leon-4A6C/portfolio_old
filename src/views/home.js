@@ -23,6 +23,9 @@ const H1 = styled.h1`
   @media only screen and (max-width: 425px) {
     font-size: 5em;
   }
+  @media only screen and (max-height: 1000px) {
+    margin-top: 0.3em;
+  }
 `
 
 const TransSpan = styled.span`
@@ -73,7 +76,7 @@ const ShootingDiv = styled.div`
 export default class Home extends React.Component {
   render() {
     return (
-      <Wrapper>
+      <Wrapper id="home">
         <H1>
           <TransSpan time="600ms">léon in</TransSpan>
           <ShootingDiv offset="900ms" />

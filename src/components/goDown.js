@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 const goDownAni = keyframes`
 0% {
@@ -19,14 +19,43 @@ const goDownAni = keyframes`
 
 `
 
+const goUpAni = keyframes`
+0% {
+  height: 0em;
+  top: 3.7em;
+}
+
+60% {
+  height: 3.7em;
+  top: 0;
+}
+
+100% {
+  height: 0em;
+  top: 0;
+}
+
+`
+
 const GoDownAnimated = styled.div`
   background-color: ${({ theme }) => theme.colors.primaryText};
   width: 2px;
-  animation: ${goDownAni} 1s ease-in-out infinite alternate;
   position: absolute;
-  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  ${({ top }) => {
+    if (top) {
+      return css`
+        top: 0;
+        animation: ${goUpAni} 1s ease-in-out infinite alternate;
+      `
+    } else {
+      return css`
+        bottom: 0;
+        animation: ${goDownAni} 1s ease-in-out infinite alternate;
+      `
+    }
+  }};
 `
 
 const GoDownWrapper = styled.div`
@@ -38,6 +67,6 @@ const GoDownWrapper = styled.div`
 
 export default props => (
   <GoDownWrapper {...props}>
-    <GoDownAnimated />
+    <GoDownAnimated top={props.top} />
   </GoDownWrapper>
 )

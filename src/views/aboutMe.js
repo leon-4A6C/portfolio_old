@@ -53,7 +53,8 @@ export default class AboutMe extends React.Component {
     return (
       <Wrapper id="aboutMeStart">
         <GoDown
-          onClick={() => scroller.scrollTo('aboutMeStart', { smooth: true })}
+          top
+          onClick={() => scroller.scrollTo('home', { smooth: true })}
         />
         <Waypoint
           onEnter={() => this.setState({ inView: true })}
