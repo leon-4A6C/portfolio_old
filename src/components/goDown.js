@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
+import { scroller } from 'react-scroll'
 
 const goDownAni = keyframes`
 0% {
@@ -66,7 +67,10 @@ const GoDownWrapper = styled.div`
 `
 
 export default props => (
-  <GoDownWrapper {...props}>
+  <GoDownWrapper
+    onClick={() => scroller.scrollTo(props.to, { smooth: true })}
+    {...props}
+  >
     <GoDownAnimated top={props.top} />
   </GoDownWrapper>
 )
