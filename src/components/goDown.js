@@ -42,6 +42,7 @@ const GoDownAnimated = styled.div`
   background-color: ${({ theme }) => theme.colors.primaryText};
   width: 2px;
   margin: 0 auto;
+  position: absolute;
   ${({ top }) => {
     if (top) {
       return css`
