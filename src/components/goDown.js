@@ -2,14 +2,14 @@ import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { scroller } from 'react-scroll'
 
-const goDownAni = keyframes`
+const goDownAni = props => keyframes`
 0% {
   height: 0em;
-  bottom: 3.7em;
+  bottom: ${props.height};
 }
 
 60% {
-  height: 3.7em;
+  height: ${props.height};
   bottom: 0;
 }
 
@@ -20,14 +20,14 @@ const goDownAni = keyframes`
 
 `
 
-const goUpAni = keyframes`
+const goUpAni = props => keyframes`
 0% {
   height: 0em;
-  top: 3.7em;
+  top: ${props.height};
 }
 
 60% {
-  height: 3.7em;
+  height: ${props.height};
   top: 0;
 }
 
@@ -41,57 +41,48 @@ const goUpAni = keyframes`
 const GoDownAnimated = styled.div`
   background-color: ${({ theme }) => theme.colors.primaryText};
   width: 2px;
-  margin: 0 auto;
   position: absolute;
-  ${({ top }) => {
-    if (top) {
-      return css`
-        top: 0;
-        animation: ${goUpAni} 1s ease-in-out infinite alternate;
-      `
-    } else {
-      return css`
-        bottom: 0;
-        animation: ${goDownAni} 1s ease-in-out infinite alternate;
-      `
-    }
-  }};
+  left: 50%;
+  transform: translateX(-50%);
+  ${({ top }) =>
+    top
+      ? css`
+          top: 0;
+          animation: ${goUpAni} 1s ease-in-out infinite alternate;
+        `
+      : css`
+          bottom: 0;
+          animation: ${goDownAni} 1s ease-in-out infinite alternate;
+        `};
 `
 
 const GoDownWrapper = styled.div`
-  height: 3.7em;
+  height: ${({ height }) => height};
   width: 1em;
   margin: 0 auto;
   cursor: pointer;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  ${({ top }) => {
-    if (top) {
-      return css`
-        top: 0;
-      `
-    } else {
-      return css`
-        bottom: 0;
-      `
-    }
-  }};
+  ${({ top }) => (top ? css`top: 0;` : css`bottom: 0;`)};
 `
 
 const Wrapper = styled.div`
-  height: 3.7em;
+  height: ${({ height }) => height};
   width: 1em;
   margin: 0 auto;
 `
 
-export default props => (
-  <Wrapper>
-    <GoDownWrapper
-      onClick={() => scroller.scrollTo(props.to, { smooth: true })}
-      {...props}
-    >
-      <GoDownAnimated top={props.top} />
-    </GoDownWrapper>
-  </Wrapper>
-)
+export default props => {
+  const height = props.height || '3.7em'
+  return (
+    <Wrapper height={height} {...props}>
+      <GoDownWrapper
+        onClick={() => scroller.scrollTo(props.to, { smooth: true })}
+        height={height}
+      >
+        <GoDownAnimated height={height} top={props.top} />
+      </GoDownWrapper>
+    </Wrapper>
+  )
+}
