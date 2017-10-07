@@ -41,9 +41,7 @@ const goUpAni = keyframes`
 const GoDownAnimated = styled.div`
   background-color: ${({ theme }) => theme.colors.primaryText};
   width: 2px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
   ${({ top }) => {
     if (top) {
       return css`
@@ -64,13 +62,35 @@ const GoDownWrapper = styled.div`
   width: 1em;
   margin: 0 auto;
   cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  ${({ top }) => {
+    if (top) {
+      return css`
+        top: 0;
+      `
+    } else {
+      return css`
+        bottom: 0;
+      `
+    }
+  }};
+`
+
+const Wrapper = styled.div`
+  height: 3.7em;
+  width: 1em;
+  margin: 0 auto;
 `
 
 export default props => (
-  <GoDownWrapper
-    onClick={() => scroller.scrollTo(props.to, { smooth: true })}
-    {...props}
-  >
-    <GoDownAnimated top={props.top} />
-  </GoDownWrapper>
+  <Wrapper>
+    <GoDownWrapper
+      onClick={() => scroller.scrollTo(props.to, { smooth: true })}
+      {...props}
+    >
+      <GoDownAnimated top={props.top} />
+    </GoDownWrapper>
+  </Wrapper>
 )
