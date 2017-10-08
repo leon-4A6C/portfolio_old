@@ -80,6 +80,7 @@ export default props => {
       <GoDownWrapper
         onClick={() => scroller.scrollTo(props.to, { smooth: true })}
         height={height}
+        top={props.top}
       >
         <GoDownAnimated height={height} top={props.top} />
       </GoDownWrapper>
