@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { gql, graphql } from 'react-apollo'
 
-import { Wrapper, GoDown } from '../components'
+import { Wrapper, GoDown, Project } from '../components'
 
 const H2 = styled.h2`text-align: center;`
 
@@ -12,7 +12,7 @@ class Projects extends React.Component {
   render() {
     let repos = []
     if (!this.props.data.loading) {
-      repos = this.props.data.user.repositories.nodes
+      repos = this.props.data.user.pinnedRepositories.nodes
     }
     return (
       <Wrapper id="projects">
@@ -22,7 +22,7 @@ class Projects extends React.Component {
           {repos
             .filter(x => !x.isFork)
             .slice(0, 6)
-            .map((x, i) => <div key={i}>{x.name}</div>)}
+            .map((x, i) => <Project data={x} key={i} />)}
         </ProjectsWrapper>
       </Wrapper>
     )
@@ -32,7 +32,7 @@ class Projects extends React.Component {
 export default graphql(gql`
   query {
     user(login: "leon-4A6C") {
-      repositories(first: 7, orderBy: { field: UPDATED_AT, direction: DESC }) {
+      pinnedRepositories(first: 6) {
         nodes {
           name
           description
@@ -47,8 +47,13 @@ export default graphql(gql`
             }
           }
           languages(first: 3, orderBy: { field: SIZE, direction: DESC }) {
-            nodes {
-              name
+            totalSize
+            edges {
+              size
+              node {
+                name
+                color
+              }
             }
           }
         }
