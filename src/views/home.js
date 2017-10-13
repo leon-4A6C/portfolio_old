@@ -25,6 +25,12 @@ const H1 = styled.h1`
   @media only screen and (max-height: 1000px) {
     margin-top: 0.3em;
   }
+  @media only screen and (max-height: 930px) {
+    margin: 0.1em 0;
+  }
+  @media only screen and (max-height: 800px) {
+    margin: 0;
+  }
 `
 
 const TransSpan = styled.span`

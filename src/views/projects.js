@@ -24,6 +24,7 @@ class Projects extends React.Component {
             .slice(0, 6)
             .map((x, i) => <Project data={x} key={i} />)}
         </ProjectsWrapper>
+        <GoDown to="contact" />
       </Wrapper>
     )
   }
