@@ -8,21 +8,34 @@ const H2 = styled.h2`text-align: center;`
 
 const ProjectsWrapper = styled.div``
 
+const Flex = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+`
+
 class Projects extends React.Component {
   render() {
     let repos = []
     if (!this.props.data.loading) {
-      repos = this.props.data.user.pinnedRepositories.nodes
+      repos = this.props.data.user.pinnedRepositories.nodes.filter(
+        x => !x.isFork
+      )
     }
     return (
       <Wrapper id="projects">
         <GoDown top to="aboutMe" />
         <H2>some of my awesome projects</H2>
         <ProjectsWrapper>
-          {repos
-            .filter(x => !x.isFork)
-            .slice(0, 6)
-            .map((x, i) => <Project data={x} key={i} />)}
+          {new Array(repos.length / 2)
+            .fill(true) // fill with random data
+            .map((x, i) => (
+              <Flex key={i}>
+                {repos
+                  .slice(i * 2, i * 2 + 2)
+                  .map((x, i) => <Project data={x} key={i} />)}
+              </Flex>
+            ))}
         </ProjectsWrapper>
         <GoDown to="contact" />
       </Wrapper>

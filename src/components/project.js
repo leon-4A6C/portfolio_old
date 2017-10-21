@@ -2,15 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  background-color: ${({ data }) => data.languages.edges[0].node.color};
+  overflow: hidden;
+  padding: 1em;
+  border: ${({ theme }) => theme.colors.primaryText} solid 2px;
+  margin: 1em;
+  flex: 1;
 `
+
+const H2 = styled.h2``
+const P = styled.p``
 
 export default class Project extends React.Component {
   render() {
-    const { name } = this.props.data
+    const { name, description } = this.props.data
     return (
       <Wrapper {...this.props}>
-        <h3>{name}</h3>
+        <H2>{name}</H2>
+        <P>{description}</P>
       </Wrapper>
     )
   }
